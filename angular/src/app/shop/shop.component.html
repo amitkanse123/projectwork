@@ -1,0 +1,44 @@
+
+<div class="container-fluid">
+    <nav class="navbar">
+        <input type="text" name="search" placeholder="search" [(ngModel)]="filter">      
+      </nav>
+<!-- <input type="text"  name="CategoryName" [(ngModel)="Categoryname" (input)="Search()" >  -->
+    <table class="table table-bordered table-hover">
+        <thead class="text-center" style="font-size: 20px;" matSort> 
+          <tr>
+            <th scope="col" (click)="sort('id')">id<i class="fa fa-arrow-down " aria-hidden="true"></i> 
+                <i class="fa fa-arrow-up " aria-hidden="true"></i> 
+            </th>
+            <th scope="col" (click)="sort('categoryid')">CataegoryId</th>
+            <th scope="col" (click)="sort('categoryname')">CategoryName <i class="fa fa-arrow-down " aria-hidden="true"></i> 
+              <i class="fa fa-arrow-up " aria-hidden="true"></i> </th>
+            <th scope="col" (click)="sort('productname')">ProductName</th>
+            <th scope="col">Description</th>
+            <th scope="col">Rating</th>
+            <th scope="col" (click)="sort('price')">Price</th>
+            <th scope="col">reviews</th>  
+          </tr>
+        </thead>
+          <tbody class="text-center "  style="font-size: 15px;">
+
+          <tr *ngFor="let i of user | orderBy: key : reverse |  filter:filter | paginate: { itemsPerPage: 5, currentPage: p }; mat-sort-header">
+              <td>{{i.id}}</td>
+              <td>{{i.categoryd}}</td>
+              <td>{{i.categoryname}}</td>
+              <td>{{i.productname}}</td>
+              <td>{{i.description}}</td>
+              <td>{{i.rating}}</td>
+              <td>{{i.price | currency:"INR":"symbol"}}</td>
+              <td>{{i.reviews}}</td>
+              </tr>
+          </tbody>
+
+          
+      
+        </table>
+
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
+
